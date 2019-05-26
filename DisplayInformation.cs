@@ -6,29 +6,28 @@ namespace NP_CompleteOrder
 {
     public class DisplayInformation
     {
-        public static void Menu(SortedList<double, string> menu)
+        public static void Menu(SortedList<decimal, string> menu)
         {
             Console.WriteLine("\n\tMenu");
             Console.WriteLine("----------------------------");
             foreach (var menuItem in menu)
             {
-                Console.WriteLine($"  ${string.Format("{0:#.00}", menuItem.Key)}\t{menuItem.Value}");
+                Console.WriteLine($"  ${menuItem.Key}\t{menuItem.Value}");
             }
             Console.WriteLine("----------------------------\n");
         }
 
-        public static void Solutions(List<double[]> solutionList, SortedList<double, string> menu)
+        public static void Solutions(List<int[]> solutionList, SortedList<decimal, string> menu)
         {
             int solutionNumber = 1;
             foreach (var solution in solutionList)
             {
                 Console.WriteLine($"Solution {solutionNumber}:");
-                foreach (var menuitem in menu)
+                for (int x = 0; x< solution.Length; x++)
                 {
-                    if (solution.Contains(menuitem.Key))
+                    if(solution[x] != 0)
                     {
-                        int count = solution.Count(x => x == menuitem.Key);
-                        Console.WriteLine($"\t{count}x {menuitem.Value}");
+                        Console.WriteLine($"\t{solution[x]}x {menu.Values[x]}");
                     }
                 }
                 Console.WriteLine();

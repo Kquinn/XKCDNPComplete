@@ -7,26 +7,30 @@ namespace NP_CompleteOrder
     {
         static void Main(string[] args)
         {
-            SortedList<double,string> menu = new SortedList<double,string>
+            SortedList<decimal, string> menu = new SortedList<decimal, string>
             {
-                {2.15, "Mixed Fruit"},
-                {2.75, "French Fries"},
-                {3.35, "Side Salad"},
-                {3.55, "Hot Wings"},
-                {4.20, "Mozzarella Sticks"},
-                {5.80, "Sampler Plate"}
+                {2.15m, "Mixed Fruit"},
+                {2.75m, "French Fries"},
+                {3.35m, "Side Salad"},
+                {3.55m, "Hot Wings"},
+                {4.20m, "Mozzarella Sticks"},
+                {5.80m, "Sampler Plate"}
             };
 
-            double defaultSpendingTotal = 15.05;
+            decimal defaultSpendingTotal = 15.05m;
             
             DisplayInformation.Menu(menu);
    
-            double spendTotal = UserInput.GetSpendTotal(defaultSpendingTotal);         
+            decimal spendTotal = UserInput.GetSpendTotal(defaultSpendingTotal);         
 
             Console.WriteLine($"Spend exactly ${string.Format("{0:#.00}", spendTotal)}:\n");
 
-            var solutions = NCompleteProblem.Solve(menu, spendTotal);
-            if(solutions.Count == 0)
+
+
+            //var solutions = NCompleteProblem.Solve(menu, spendTotal);
+            var solutions = NCompleteProblem.OptimizedSolve(menu, spendTotal);
+
+            if (solutions.Count == 0)
             {
                 Console.WriteLine("No valid solutions.\n");
             }
@@ -34,7 +38,7 @@ namespace NP_CompleteOrder
             {
                 DisplayInformation.Solutions(solutions, menu);
             }
-            
+
             Console.Write("\n\nTask Complete\nPress Enter to Close");
             Console.ReadLine();
         }   
